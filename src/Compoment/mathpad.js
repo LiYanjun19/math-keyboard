@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { EditableMathField, StaticMathField } from 'react-mathquill';
 import KeyPad from './keypad';
-import { Tabs, Tab, Typography, Box, Stack, Switch, Paper } from "@mui/material";
+import { Tabs, Tab, Typography, Box, Stack, Switch, Paper, Button } from "@mui/material";
 import { MathComponent } from "mathjax-react";
 import MathInput from "./mathinput";
 import { TabIcons } from './mathicons';
@@ -41,10 +41,12 @@ function a11yProps(index) {
     };
 }
 
-const MathPad = () => {
+const MathPad = ({ output, setOutput }) => {
     const [tabValue, setTabValue] = React.useState(0);
     const [checked, setChecked] = React.useState(true);
     const [latex, setLatex] = useState("\\frac{1}{\\sqrt{2}}\\cdot 2");
+
+
 
     const handleTabChange = (event, newTab) => {
         setTabValue(newTab);
@@ -58,6 +60,12 @@ const MathPad = () => {
     const handleInput = (mathField) => {
         setLatex(mathField.latex());
     }
+
+    const handleSubmit = () => {
+        setOutput(latex);
+    }
+
+
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -105,6 +113,7 @@ const MathPad = () => {
             {TabIcons.map((v, i) =>
                 <TabPanel sx={{ textTransform: 'none' }} value={tabValue} index={i}>
                     <KeyPad latex={latex} setLatex={setLatex} tabValue={v} />
+
                 </TabPanel>
             )}
 
@@ -137,7 +146,17 @@ const MathPad = () => {
                     <MathComponent tex={latex} display={true} />
                 </Paper>
             </Box>
+
+            <Button autoFocus onClick={handleSubmit}>
+                Submit
+            </Button>
+
         </Box >
+
+
+
+
+
     );
 };
 
