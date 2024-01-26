@@ -12,14 +12,7 @@ import { Button } from '@mui/material';
 function App() {
 
 
-  const [output, setOutput] = useState(null);
-  console.log(output);
 
-  if (window.ReactNativeWebView) {
-    window.ReactNativeWebView.postMessage(output);
-  } else {
-    console.log("Running in a non-React Native environment");
-  }
 
 
   return (
@@ -30,7 +23,7 @@ function App() {
 
 
 
-      <MathPad output={output} setOutput={setOutput} />
+      <MathPad />
 
     </div>
 

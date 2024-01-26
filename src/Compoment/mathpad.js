@@ -41,7 +41,7 @@ function a11yProps(index) {
     };
 }
 
-const MathPad = ({ output, setOutput }) => {
+const MathPad = () => {
     const [tabValue, setTabValue] = React.useState(0);
     const [checked, setChecked] = React.useState(true);
     const [latex, setLatex] = useState("\\frac{1}{\\sqrt{2}}\\cdot 2");
@@ -51,18 +51,33 @@ const MathPad = ({ output, setOutput }) => {
     const handleTabChange = (event, newTab) => {
         setTabValue(newTab);
     };
-    const handleInlineBlockChange = (event) => {
-        setChecked(event.target.checked);
-    };
-
 
 
     const handleInput = (mathField) => {
         setLatex(mathField.latex());
     }
 
+    const handleInlineChange = (event) => {
+        setChecked(event.target.checked);
+        console.log(checked);
+    }
+
     const handleSubmit = () => {
-        setOutput(latex);
+        if (window.ReactNativeWebView) {
+            if (latex != null) {
+                if (checked) {
+                    window.ReactNativeWebView.postMessage('$' + latex + '$');
+                } else {
+                    window.ReactNativeWebView.postMessage('$$' + latex + '$$');
+                }
+
+
+            }
+
+        } else {
+            console.log("Running in a non-React Native environment");
+        }
+
     }
 
 
@@ -116,6 +131,17 @@ const MathPad = ({ output, setOutput }) => {
 
                 </TabPanel>
             )}
+
+            <Stack direction="row" spacing={1} alignItems="center">
+                <Typography>Block</Typography>
+                <Switch
+                    checked={checked}
+                    onChange={handleInlineChange}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                />
+                <Typography>Inline</Typography>
+            </Stack>
+
 
 
             <Box sx={{ marginTop: '15px' }}>
