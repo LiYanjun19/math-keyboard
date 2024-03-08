@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Tooltip } from "@mui/material";
-import { StaticMathField } from "react-mathquill";
 import { MathComponent } from "mathjax-react";
+import { StaticMathField } from "react-mathquill";
 
 const Buttons = ({ index, button, latex, setLatex }) => {
     return (
@@ -10,13 +10,17 @@ const Buttons = ({ index, button, latex, setLatex }) => {
 
                 onClick={() => { setLatex(latex + button.latexCode) }}
             >
-                {button.useJax ? (
+                  {button.useJax ? (
                     <MathComponent tex={button.latexCode ? button.latexCode : button.mathCode} />
                 ) : (
                     <StaticMathField>
                         {button.latexCode ? button.latexCode : button.mathCode}
                     </StaticMathField>
-                )}
+                )}  
+
+                
+                
+
             </Button>
         </Tooltip>
     );

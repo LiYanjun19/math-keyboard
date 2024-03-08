@@ -7,12 +7,13 @@ import { MathIcons, TabIcons } from './mathicons'
 
 const KeyPad = ({ latex, setLatex, tabValue }) => {
     return (
-        <Box sx={{ spacing: "1", boxShadow: 5, padding: "5px", borderRadius: 2 }}>
+       
             <Grid
                 container
                 direction="row"
                 justifyContent="space-evenly"
                 alignItems="center"
+                
             >
                 {
                     MathIcons.map((icon) => (
@@ -23,7 +24,7 @@ const KeyPad = ({ latex, setLatex, tabValue }) => {
                     ))
                 }
             </Grid>
-        </Box>
+      
 
     );
 }

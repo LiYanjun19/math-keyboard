@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { EditableMathField, StaticMathField } from 'react-mathquill';
+import { addStyles, EditableMathField, StaticMathField } from 'react-mathquill';
 import KeyPad from './keypad';
-import { Tabs, Tab, Typography, Box, Stack, Switch, Paper, Button } from "@mui/material";
+import { Tabs, Tab, Typography, Box, Stack, Switch, Paper, Button, Grid } from "@mui/material";
 import { MathComponent } from "mathjax-react";
-import MathInput from "./mathinput";
 import { TabIcons } from './mathicons';
 import PropTypes from 'prop-types';
 
@@ -80,58 +79,75 @@ const MathPad = () => {
 
     }
 
-
+addStyles()
 
     return (
-        <Box sx={{ width: "100%" }}>
+        <Grid sx={{ width: "100%"}} >
 
 
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Grid sx={{ bgcolor: '#FAFAFA'}}>
                 <Tabs
                     value={tabValue}
                     onChange={handleTabChange}
                     aria-label="Math Symbol Tabs"
                     variant="scrollable"
                     scrollButtons="auto"
-                    indicatorColor="red"
+                    width= "30"
+                    
+                    
+                   
+                       
+                                      
                 >
                     {TabIcons.map((v, i) => (
                         <Tab
                             sx={{
                                 textTransform: "none",
                                 fontWeight: "bold",
-                                fontFamily: "Crambia Math",
-                                fontStyle: "italic",
-                                fontSize: "24px",
+                                fontFamily: "Crambia Math",                             
+                                fontSize: "20px",
+                                                               
+                                
                                 "&:hover": {
                                     backgroundColor: "#6d99ec",
                                     color: "#fff",
+                                    borderRadius: "10px",
                                 },
                                 "&:focus": {
                                     color: "#fff",
-                                    borderRadius: "3px",
+                                    borderRadius: "10px",
                                     backgroundColor: "#6d99ec",
                                 },
+
                             }}
                             label={v}
                             {...a11yProps(i)}
                         />
                     ))}
+
+
+                 
                 </Tabs>
-            </Box>
 
-
-            <Box sx={{ textTransform: "none", marginTop: "5px" }}>
-                <KeyPad latex={latex} setLatex={setLatex} tabValue={"Default"} />
-            </Box>
-
-            {TabIcons.map((v, i) =>
+                
+                {TabIcons.map((v, i) =>
                 <TabPanel sx={{ textTransform: 'none' }} value={tabValue} index={i}>
                     <KeyPad latex={latex} setLatex={setLatex} tabValue={v} />
 
                 </TabPanel>
-            )}
+            )} 
 
+
+
+
+                
+            </Grid>
+            
+
+            
+
+            
+        
             <Stack direction="row" spacing={1} alignItems="center">
                 <Typography>Block</Typography>
                 <Switch
@@ -149,8 +165,12 @@ const MathPad = () => {
                     latex={latex}
                     id="math-input"
                     onChange={handleInput}
+                    
+                    
 
                 />
+                
+
                 <Paper
                     id="mathtex-input2"
                     component="div"
@@ -177,7 +197,7 @@ const MathPad = () => {
                 Submit
             </Button>
 
-        </Box >
+        </Grid >
 
 
 

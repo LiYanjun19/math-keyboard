@@ -4,6 +4,8 @@ import KeyPad from './Compoment/keypad';
 import { getSuggestedQuery } from "@testing-library/react";
 import { Button } from '@mui/material';
 
+import { MathComponent } from "mathjax-react";
+import { StaticMathField } from "react-mathquill";
 
 
 
@@ -24,6 +26,9 @@ function App() {
 
 
       <MathPad />
+
+     
+
 
     </div>
 
